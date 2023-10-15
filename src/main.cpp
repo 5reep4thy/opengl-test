@@ -1,8 +1,21 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
 #include<bits/stdc++.h>
+#define ASSERT(x) if(!(x)) __builtin_trap();
+#define GLCall(x) GLClearError();\
+    x;\
+    ASSERT(GLLogCall(#x, __FILE__, __LINE__))
 
+static void GLClearError() {
+    while(glGetError() != GL_NO_ERROR);
+}
+static bool GLLogCall(const char* function, const char* file, int line) {
+    while (GLenum error = glGetError()) {
+        std::cout << "[OpenGL Error] (" << error << "):" << function << " " << file << ":" << line << std::endl;
+        return false;
+    }
+    return true;
+}
 static void ParseShader(const std::string& filepath, std::string& vertexShader, std::string& fragmentShader) {
     std::ifstream stream(filepath);
     std::string line;
@@ -20,7 +33,6 @@ static void ParseShader(const std::string& filepath, std::string& vertexShader, 
     }
         else
             ss[(int)type] << line << "\n";
-
         
     }
     vertexShader = ss[0].str();
@@ -128,8 +140,7 @@ int main(void) {
     while (!glfwWindowShouldClose(window)) {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
-
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
