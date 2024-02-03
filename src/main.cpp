@@ -4,6 +4,7 @@
 #include "renderer.h"
 #include "vertex_buffer.h"
 #include "index_buffer.h"
+#include "vertex_array.h"
 
 static void ParseShader(const std::string& filepath, std::string& vertexShader, std::string& fragmentShader) {
     std::ifstream stream(filepath);
@@ -105,12 +106,13 @@ int main() {
           0, 1, 2, 
           2, 3, 0
       };
-      unsigned int VAO; glGenVertexArrays(1, &VAO); glBindVertexArray(VAO);
-
+      VertexArray va;
       VertexBuffer vb(positions, sizeof(float)* 4 * 2);
 
-      glEnableVertexAttribArray(0);
-      glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2*sizeof(float), 0);
+      VertexBufferLayout layout;
+      layout.Push<float> (2);
+      va.AddBuffer(vb, layout);
+
 
       IndexBuffer ib(indices, sizeof(unsigned int) * 6);
 
@@ -133,13 +135,14 @@ int main() {
           /* Render here */
           glClear(GL_COLOR_BUFFER_BIT);
           GLCall(glUseProgram(shader));
-          glBindVertexArray(VAO);
           glUniform4f(location, r, 0.3f, 0.8f, 1.0f);
           if (r < 0.0f || r > 1.0f)
               increment = -increment;
           r += increment;
               
+          va.Bind();
           ib.Bind();
+         
           GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 
           /* Swap front and back buffers */
