@@ -3,17 +3,44 @@
     "arguments": [
       "/usr/bin/clang++",
       "-c",
+      "-g",
       "-std=c++11",
       "-arch",
       "arm64",
+      "-I",
+      "include",
       "-framework",
       "OpenGL",
+      "-I",
+      "/opt/homebrew/Cellar/boost/1.83.0/include",
       "-o",
       "bin/main",
       "src/main.cpp"
     ],
     "directory": "/Users/sreepathyjayanand/Documents/code/opengl-test",
     "file": "/Users/sreepathyjayanand/Documents/code/opengl-test/src/main.cpp",
+    "output": "/Users/sreepathyjayanand/Documents/code/opengl-test/bin/main"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang++",
+      "-c",
+      "-g",
+      "-std=c++11",
+      "-arch",
+      "arm64",
+      "-I",
+      "include",
+      "-framework",
+      "OpenGL",
+      "-I",
+      "/opt/homebrew/Cellar/boost/1.83.0/include",
+      "-o",
+      "bin/main",
+      "src/renderer.cpp"
+    ],
+    "directory": "/Users/sreepathyjayanand/Documents/code/opengl-test",
+    "file": "/Users/sreepathyjayanand/Documents/code/opengl-test/src/renderer.cpp",
     "output": "/Users/sreepathyjayanand/Documents/code/opengl-test/bin/main"
   }
 ]
