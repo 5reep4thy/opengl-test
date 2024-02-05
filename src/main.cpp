@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include<bits/stdc++.h>
 #include "renderer.h"
+#include "texture.h"
 #include "vertex_buffer.h"
 #include "index_buffer.h"
 #include "vertex_array.h"
@@ -39,19 +40,24 @@ int main() {
     fprintf(stdout, "GL version: %s\n", glGetString(GL_VERSION));
     {
       float positions[] = {
-         -0.5f, -0.5f,
-          0.5f, -0.5f,
-          0.5f,  0.5f,
-          -0.5f, 0.5f
+         -0.5f, -0.5f, 0.0f, 0.0f,
+          0.5f, -0.5f, 1.0f, 0.0f,
+          0.5f,  0.5f, 1.0f, 1.0f,
+          -0.5f, 0.5f, 0.0, 1.0f
       };
       unsigned int indices[] = {
           0, 1, 2, 
           2, 3, 0
       };
+
+      GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+      GLCall(glEnable(GL_BLEND));
+
       VertexArray va;
-      VertexBuffer vb(positions, sizeof(float)* 4 * 2);
+      VertexBuffer vb(positions, sizeof(float)* 4 * 4);
 
       VertexBufferLayout layout;
+      layout.Push<float> (2);
       layout.Push<float> (2);
       va.AddBuffer(vb, layout);
 
@@ -60,6 +66,9 @@ int main() {
       Shader shader("res/shaders/basic.shader");
       shader.Bind();
       shader.SetUniform4f("u_Color", 0.2f, 0.3f, 0.8f, 1.0f);
+      Texture texture("res/textures/SJ.png");
+      texture.Bind();
+      shader.SetUniform1i("u_Texture", 0);
 
       shader.Unbind();
       va.UnBind();
