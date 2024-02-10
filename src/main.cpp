@@ -5,6 +5,7 @@
 #include "glm/ext/vector_float4.hpp"
 #include "renderer.h"
 #include "test.h"
+#include "test_texture2d.h"
 #include "texture.h"
 #include "vertex_buffer.h"
 #include "index_buffer.h"
@@ -62,6 +63,7 @@ int main() {
       test::TestMenu* testMenu = new test::TestMenu(currentTest);
       currentTest = testMenu;
       testMenu->RegisterTest<test::TestClearColor> ("Clear Color");
+      testMenu->RegisterTest<test::TestTexture2d>("Texture 2D");
 
       /* Loop until the user closes the window */
       while (!glfwWindowShouldClose(window)) {

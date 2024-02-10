@@ -1,5 +1,6 @@
 .gitmodules
 .cache
 */.DS_Store
+.DS_Store
 imgui.ini
 bin

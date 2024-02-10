@@ -1,5 +1,5 @@
 CXX = clang++
-CXX_FLAGS =  -arch arm64 -std=c++11
+CXX_FLAGS =  -arch arm64 -std=c++17
 BIN_FOLDER = bin
 EXE = $(BIN_FOLDER)/app
 SRC_FOLDER = src
@@ -11,7 +11,7 @@ SOURCES = $(SRC_FOLDER)/main.cpp
 SOURCES += $(SRC_FOLDER)/index_buffer.cpp $(SRC_FOLDER)/renderer.cpp $(SRC_FOLDER)/shader.cpp $(SRC_FOLDER)/stb_image.cpp $(SRC_FOLDER)/texture.cpp $(SRC_FOLDER)/vertex_array.cpp $(SRC_FOLDER)/vertex_buffer.cpp
 
 #TEST SOURCES
-SOURCES += $(TEST_FOLDER)/test_clear_color.cpp $(TEST_FOLDER)/test.cpp
+SOURCES += $(TEST_FOLDER)/test_clear_color.cpp $(TEST_FOLDER)/test.cpp $(TEST_FOLDER)/test_texture2d.cpp
 
 #IMGUI SOURES
 SOURCES += $(IMGUI_DIR)/backends/imgui_impl_glfw.cpp $(IMGUI_DIR)/backends/imgui_impl_opengl3.cpp $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui_widgets.cpp $(IMGUI_DIR)/imgui_tables.cpp
