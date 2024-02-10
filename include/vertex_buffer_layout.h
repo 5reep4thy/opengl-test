@@ -1,6 +1,7 @@
 #pragma once
-#include<bits/stdc++.h>
 #include<GL/glew.h>
+#include <assert.h>
+#include<vector>
 // Start ind, no of coordinates, size of coordinate, stride, normalized
 struct VertexBufferElement {
   unsigned int type, count;
